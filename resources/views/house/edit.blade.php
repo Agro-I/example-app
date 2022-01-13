@@ -1,14 +1,14 @@
-@extends('app')
-@section('title','Houses')
-@section('h1','Редактирование Дома')
-@section('content')
+<x-app-layout>
+    <x-slot name="header">
+    </x-slot>
+
     <div class="p-4 d-flex mw-auto">
 
         <div class="m-5">
             <form action="/houses/{{ $house->id }}" method="post" >
-
                 @method('PATCH')
-                <input class="form-control" type="file" name="emblem"  value="{{'images/'.$house->emblem}}" id="emblem" ><br>
+                @csrf
+                <input class="form-control" type="file" name="emblem"  value="{{'/images/'.$house->emblem}}" id="emblem" ><br>
                 <input class="form-control" type="text" name="name" value="{{$house->name}}" id="name" ><br>
                 @error('name') <p style="color:red">{{ $message }}</p>@enderror
                 <input class="form-control" type="text" name="ancestral_fortress" value="{{$house->ancestral_fortress}}" id="ancestral_fortress" ><br>
@@ -17,7 +17,7 @@
                 @error('slogan') <p style="color:red">{{ $message }}</p>@enderror
                 <input class="form-control" type="number" name="quantity_of_characters" value="{{$house->quantity_of_characters}}" id="quantity_of_characters"><br>
                 @error('quantity_of_characters') <p style="color:red">{{ $message }}</p>@enderror
-                @csrf
+
                 <div class="col-md-12">
                     <button type="submit" class="btn btn-success btn-send pt-2 btn-block">
                         Редактировать дом
@@ -31,4 +31,5 @@
             <img class="rounded  w-100" src="{{'/images/'.$house->emblem}}">
         </div>
     </div>
-@endsection
+
+</x-app-layout>

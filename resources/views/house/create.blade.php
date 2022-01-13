@@ -1,7 +1,7 @@
-    @extends('app')
-    @section('title','Houses')
-    @section('h1',' Добавление Дома')
-    @section('content')
+<x-app-layout>
+    <x-slot name="header">
+    </x-slot>
+
     <div class="container p-4 bg-dark">
         <form action="/houses" method="post" >
 
@@ -31,4 +31,4 @@
         <br>
     </div>
 
-@endsection
+</x-app-layout>

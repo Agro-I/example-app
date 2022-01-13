@@ -23,7 +23,9 @@ class House extends Model
         'slogan',
         'quantity_of_characters',
         'quantity_of_live_characters',
+        'user_id',
     ];
+    private mixed $user_id;
     /**
      * @var mixed
      */

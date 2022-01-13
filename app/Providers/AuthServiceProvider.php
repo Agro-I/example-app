@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\House;
+use App\Models\User;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 use Illuminate\Support\Facades\Gate;
 
@@ -24,7 +26,13 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
+        Gate::define('house_update', function (User $user, House $house) {
+            return $house->user_id == $user->id || $user->is_admin;
+        });
+        $this->registerPolicies();
+        Gate::define('force_delete', function (User $user, House $house) {
+            return true ===  $user->is_admin;
+        });
         //
     }
 }
