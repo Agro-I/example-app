@@ -26,6 +26,7 @@ class HouseController extends Controller
         return view('house.edit',compact('house'));
     }
     public function store() {
+
         $data = request()->validate([
             'emblem' => 'required',
             'name' => 'required',
@@ -33,6 +34,7 @@ class HouseController extends Controller
             'slogan' => 'required',
             'quantity_of_characters' => 'required',
             'quantity_of_live_characters'=> 'required',
+            'user_id'=>'required'
         ]);
         $data['user_id']=Auth::id();
         House::create($data);
@@ -72,5 +74,9 @@ class HouseController extends Controller
     }
     public function show(House $house) {
         return view('house.show', compact('house'));
+    }
+    public function comments(House $house)
+    { $comments =\App\Models\Comment::all();
+        return view('comment.index', compact('comments','house'));
     }
 }
