@@ -18,6 +18,9 @@
                     <x-nav-link :href="route('create')" :active="request()->routeIs('create')">
                         {{ __('Создать дом') }}
                     </x-nav-link>
+                    <x-nav-link :href="route('users')" :active="request()->routeIs('users')">
+                        {{ __('Друзья') }}
+                    </x-nav-link>
                     <x-nav-link :href="route('houses')" :active="request()->routeIs('houses')">
                         {{ __('Главная') }}
                     </x-nav-link>

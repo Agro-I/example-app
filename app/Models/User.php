@@ -15,7 +15,7 @@ class User extends Authenticatable
     /**
      * The attributes that are mass assignable.
      *
-     * @var array<int, string>
+     * @var string[]
      */
     protected $fillable = [
         'name',
@@ -26,7 +26,7 @@ class User extends Authenticatable
     /**
      * The attributes that should be hidden for serialization.
      *
-     * @var array<int, string>
+     * @var array
      */
     protected $hidden = [
         'password',
@@ -36,10 +36,29 @@ class User extends Authenticatable
     /**
      * The attributes that should be cast.
      *
-     * @var array<string, string>
+     * @var array
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
-    private mixed $id;
+
+    public function releases()
+    {
+        return $this->hasMany(GrandTourRelease::class);
+    }
+
+    public function followed()
+    {
+        return $this->belongsToMany(User::class, 'followers_users', 'user_id', 'follower_id');
+    }
+
+    public function addFollower(User $user)
+    {
+        $this->followed()->attach($user->id);
+    }
+
+    public function removeFollower(User $user)
+    {
+        $this->followed()->detach($user->id);
+    }
 }

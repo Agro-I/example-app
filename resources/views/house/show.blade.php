@@ -11,6 +11,13 @@
                 <p> Кол-во персонажей:   {{ $house->quantity_of_characters }}</p>
             </div>
             <div>
+                <form style="display:inline;" action="/houses/{{ $house->id }}/comments" method="get">
+                    @csrf
+
+                    <button type="submit" class="btn btn-light">Комментарии</button>
+                </form>
+            </div>
+            <div>
                 @can('house_update', [$house])
                     <a href="/houses/{{ $house->id }}/edit" class="text-decoration-none text-gray-300">Редактировать</a>
                 @endcan
